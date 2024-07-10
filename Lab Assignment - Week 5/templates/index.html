@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Students list</h1>
+    {% if students|length==0 %}
+        <p>No student found. Add the students now!</p>
+        
+    {% else %}
+        <table id = "all-students">
+            <tr>
+                <th>SNo</th>
+                <th>Roll Number</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Actions</th>
+            </tr>
+            {% for i in students %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td><a href="/student/{{ i.student_id }}">{{ i.roll_number }}</a></td>
+                    <td>{{ i.first_name }}</td>
+                    <td>{{ i.last_name }}</td>
+                    <td>
+                        <a href="/student/{{ i.student_id }}/update" type="button">Update</a>
+                        <a href="/student/{{ i.student_id }}/delete" type="button">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>        
+
+    {% endif %}
+    <a href="/student/create" type="button">+ Add Student</a>
+</body>
+</html>
